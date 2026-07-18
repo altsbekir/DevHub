@@ -31,3 +31,7 @@ class User():
         for following in following_list:
             following_obj = User(following)
             print(f"{following_list.index(following) + 1}. {following} ({following_obj.name})")
+
+    def list_repos(self):
+        for (ix, repo) in enumerate(requests.get(f"{self.url}/repos").json()):
+            print(f"{ix + 1}. {repo["name"]} ({repo["stargazers_count"]} stars.)")
