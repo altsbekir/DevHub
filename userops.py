@@ -2,14 +2,6 @@ import requests
 
 class User():
 
-    url = ""
-    name = ""
-    response = {}
-    public_repo = int()
-    followers = int()
-    following = int()
-    created_at = ""
-
     def __init__(self, user_id):
         self.user_id = user_id
         self.url = f"https://api.github.com/users/{user_id}"
@@ -27,3 +19,8 @@ class User():
         print("Takipçi: ", self.followers)
         print("Takip edilen: ", self.following)
         print("Oluşturulma tarihi: ", self.created_at)
+
+    def list_followers(self):
+        followers_list = [dict["login"] for dict in requests.get(f"{self.url}/followers").json()]
+        for follower in followers_list:
+            print(f"{followers_list.index(follower) + 1}. {follower}")
