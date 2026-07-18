@@ -25,3 +25,9 @@ class User():
         for follower in followers_list:
             follower_obj = User(follower)
             print(f"{followers_list.index(follower) + 1}. {follower} ({follower_obj.name})")
+
+    def list_following(self):
+        following_list = [dict["login"] for dict in requests.get(f"{self.url}/following").json()]
+        for following in following_list:
+            following_obj = User(following)
+            print(f"{following_list.index(following) + 1}. {following} ({following_obj.name})")
